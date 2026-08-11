@@ -9,7 +9,8 @@
     "build": "npm run formatter && npm run generate && astro build",
     "start": "astro dev",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "update-all": "npx @astrojs/upgrade && npm install starlight-theme-black@latest"
   },
   "devDependencies": {
     "tsx": "^4.0.0",
