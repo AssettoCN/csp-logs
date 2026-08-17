@@ -7,6 +7,8 @@ import { getChangelogFiles } from './src/ts/changelogUtils.ts';
 import versions from './src/data/versions.json' assert { type: 'json' };
 
 const flat = versions.groups.flat();
+const latestPreviewVersion = flat.find((v) => v.isPreview);
+const latestPublicVersion = flat.find((v) => !v.isPreview);
 
 const changelogsDir = path.join(process.cwd(), 'src', 'content', 'docs');
 
@@ -35,7 +37,7 @@ const changelogFiles = getChangelogFiles(changelogsDir)
   .map(({ slug, title }) => {
     const version = flat.find((v) => v.link === `/csp-logs/${slug}` || v.link === `/${slug}`);
     if (version && version.published) {
-      return { label: title, link: `/${slug}`, badge: { text: 'some time ago', variant: 'default' as const } };
+      return { label: title, link: `/${slug}`, attrs: { 'data-timeago': version.published } };
     }
     return { label: title, link: `/${slug}` };
   });
@@ -51,8 +53,9 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 1 },
       components: {
-        Header: './src/components/Header.astro', //adds Content Manager social icon
         Sidebar: './src/components/Sidebar.astro', //adds Bidirectional activation of sidebar items (going to /latest/public will also highlight the version its mirroring in the sidebar and vice versa)
+        Footer: './src/components/Footer.astro', //adds footer text
+        SocialIcons: './src/components/SocialIcons.astro', //adds Content Manager icon to header
       },
       social: [
         { icon: 'discord', label: 'Discord', href: 'https://discord.gg/nM4Xkrt' },
@@ -62,20 +65,30 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Overview',
-          items: [{ slug: '/' }, { label: 'Latest Preview', link: '/latest/preview', badge: { text: 'some time ago', variant: 'default' } }, { label: 'Latest Public', link: '/latest/public', badge: { text: 'some time ago', variant: 'default' } }, { slug: 'versions' }],
+          items: [
+            { slug: '/' },
+            { label: 'Latest Preview', link: '/latest/preview', attrs: { 'data-timeago': latestPreviewVersion?.published } },
+            { label: 'Latest Public', link: '/latest/public', attrs: { 'data-timeago': latestPublicVersion?.published } },
+            { slug: 'versions' },
+          ],
         },
         { label: 'Changelogs', items: changelogFiles },
       ],
       plugins: [
         starlightThemeBlack({
-          footerText: 'This site is maintained by [C1XTZ](https://github.com/C1XTZ), a 3rd party unaffiliated with Custom Shaders Patch. You can contribute [here.](https://github.com/C1XTZ/csp-logs)',
+          docs: {
+            showMarkdownActions: {
+              prompt: '',
+              agents: {
+                chatgpt: false,
+                claude: false,
+                v0: false,
+                scira: false,
+              },
+            },
+          },
         }),
       ],
     }),
   ],
-  vite: {
-    build: {
-      cssMinify: 'esbuild',
-    },
-  },
 });

@@ -8,14 +8,8 @@ const starlightRoute = (Astro.locals as { starlightRoute: StarlightRouteData }).
 const { sidebar, id } = starlightRoute;
 
 const flat = versions.groups.flat();
-const latestPreviewVersion = flat.find((v) => v.isPreview);
-const latestPublicVersion = flat.find((v) => !v.isPreview);
-const latestPreview = latestPreviewVersion?.published ?? null;
-const latestPublic = latestPublicVersion?.published ?? null;
-const pathDates = Object.fromEntries(flat.filter((v) => v.published).map((v) => [v.link.replace('/csp-logs', ''), v.published]));
-
-const latestPreviewSlug = latestPreviewVersion?.link.replace('/csp-logs/', '') || '';
-const latestPublicSlug = latestPublicVersion?.link.replace('/csp-logs/', '') || '';
+const latestPreviewSlug = flat.find((v) => v.isPreview)?.link.replace('/csp-logs/', '') || '';
+const latestPublicSlug = flat.find((v) => !v.isPreview)?.link.replace('/csp-logs/', '') || '';
 
 const isLatestPreviewPage = id === 'latest/preview' || (latestPreviewSlug && id === latestPreviewSlug);
 const isLatestPublicPage = id === 'latest/public' || (latestPublicSlug && id === latestPublicSlug);
@@ -31,57 +25,56 @@ if (isLatestPublicPage) {
 
 <ThemeSidebar />
 
-<script is:inline define:vars={{ latestPreview, latestPublic, pathDates }}>
-  const timeAgo = (s) => {
-    if (!s) return '';
+<script is:inline>
+  (function () {
+    function timeAgo(s) {
+      if (!s) return '';
 
-    const [y, m, d] = s.split('-').map(Number);
-    if (!y || !m || !d) return '';
+      const [y, m, d] = s.split('-').map(Number);
+      if (!y || !m || !d) return '';
 
-    const date = new Date(Date.UTC(y, m - 1, d));
+      const date = new Date(Date.UTC(y, m - 1, d));
 
-    const now = new Date();
-    const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+      const now = new Date();
+      const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
 
-    if (date > today) return 'just now';
+      if (date > today) return 'just now';
 
-    let Y = today.getUTCFullYear() - date.getUTCFullYear();
-    let M = today.getUTCMonth() - date.getUTCMonth();
-    let D = today.getUTCDate() - date.getUTCDate();
+      let Y = today.getUTCFullYear() - date.getUTCFullYear();
+      let M = today.getUTCMonth() - date.getUTCMonth();
+      let D = today.getUTCDate() - date.getUTCDate();
 
-    if (D < 0) {
-      M--;
-      D += new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), 0)).getUTCDate();
+      if (D < 0) {
+        M--;
+        D += new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), 0)).getUTCDate();
+      }
+
+      if (M < 0) {
+        Y--;
+        M += 12;
+      }
+
+      if (Y) return `${Y} year${Y > 1 ? 's' : ''} ago`;
+      if (M) return `${M} month${M > 1 ? 's' : ''} ago`;
+      if (D === 1) return 'yesterday';
+      return D > 1 ? `${D} days ago` : 'today';
     }
 
-    if (M < 0) {
-      Y--;
-      M += 12;
+    function resolveTimeago() {
+      document.querySelectorAll('[data-timeago]').forEach(function (el) {
+        const text = timeAgo(el.dataset.timeago);
+        if (el.tagName === 'A') {
+          el.setAttribute('data-timeago-text', text);
+        } else {
+          el.textContent = text;
+        }
+      });
     }
 
-    if (Y) return `${Y} year${Y > 1 ? 's' : ''} ago`;
-    if (M) return `${M} month${M > 1 ? 's' : ''} ago`;
-    if (D === 1) return 'yesterday';
-    return D > 1 ? `${D} days ago` : 'today';
-  };
-
-  function normalizePath(href) {
-    return href.replace(/^https?:\/\/[^/]+/i, '').replace(/^\/csp-logs(?=\/|$)/, '');
-  }
-
-  const previewBadge = document.querySelector("a[href$='/latest/preview'] .entry-badge");
-  const publicBadge = document.querySelector("a[href$='/latest/public'] .entry-badge");
-  if (previewBadge && latestPreview) previewBadge.setAttribute('data-timeago', latestPreview);
-  if (publicBadge && latestPublic) publicBadge.setAttribute('data-timeago', latestPublic);
-
-  document.querySelectorAll('.entry-badge:not([data-timeago])').forEach(function (badge) {
-    const href = badge.closest('a')?.getAttribute('href');
-    if (!href || href.includes('/latest/')) return;
-    const published = pathDates[normalizePath(href)];
-    if (published) badge.setAttribute('data-timeago', published);
-  });
-
-  document.querySelectorAll('[data-timeago]').forEach(function (el) {
-    el.textContent = timeAgo(el.dataset.timeago);
-  });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', resolveTimeago);
+    } else {
+      resolveTimeago();
+    }
+  })();
 </script>

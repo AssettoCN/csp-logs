@@ -4,54 +4,59 @@
   --sl-font: 'Google Sans', sans-serif !important;
   --sl-font-mono: 'Google Sans Code', monospace !important;
 
-  --vt-offset: 2.5rem;
+  --vt-offset: 2.8rem;
   --vt-line-width: 2px;
   --vt-stem-left: 1.3rem;
   --vt-release-left-gradient: linear-gradient(90deg, color-mix(in oklab, var(--card) 90%, black 10%) 0%, var(--card) 100%);
   --vt-release-right-gradient: linear-gradient(270deg, color-mix(in oklab, var(--card) 90%, black 10%) 0%, var(--card) 100%);
 
-  --custom-sidebar-width: 15rem;
+  /* Page and sidebar sizing. */
+  --sl-content-width: 85rem;
+  --sl-sidebar-width: 15rem;
+
+  --page-max-width: calc(var(--sl-content-width) + var(--sl-sidebar-width) + 1.5rem + 18rem);
+  --page-inset: max(0px, calc((100vw - min(100vw, var(--page-max-width))) / 2));
+}
+
+/* Main content width fix. */
+[data-has-sidebar][data-has-toc] .main-pane {
+  max-width: var(--sl-content-width) !important;
+}
+
+[data-has-sidebar] .sl-container {
+  margin-inline: 0rem 0 !important;
+}
+
+/* Sidebar content width fix. */
+.sidebar-content {
+  width: 100% !important;
+}
+
+/* Add spacing between the sidebar and main content. */
+.main-pane {
+  margin-inline: 1.5rem 0 !important;
 }
 
 [data-theme='dark'] {
-  --vt-release-left-gradient: linear-gradient(90deg, color-mix(in oklab, var(--card) 90%, white 10%) 0%, var(--card) 100%);
-  --vt-release-right-gradient: linear-gradient(270deg, color-mix(in oklab, var(--card) 90%, white 10%) 0%, var(--card) 100%);
+  --vt-release-left-gradient: linear-gradient(90deg, color-mix(in oklab, var(--gray-7) 90%, white 10%) 0%, var(--gray-7) 100%);
+  --vt-release-right-gradient: linear-gradient(270deg, color-mix(in oklab, var(--gray-7) 90%, white 10%) 0%, var(--gray-7) 100%);
 }
 
-/* Page widths */
-.container,
-.container-wrapper {
-  max-width: 120rem !important;
-}
-
-.container-main .main {
-  max-width: none !important;
-}
-
-/* Sidebar width */
-.container-wrapper-main {
-  grid-template-columns: var(--custom-sidebar-width) minmax(0, 1fr) !important;
-}
-
-/* Reduce markdown list margins */
+/* Reduce markdown list spacing. */
 .sl-markdown-content ul:not(:where(.not-content *)),
-.sl-markdown-content ol:not(:where(.not-content *)) {
-  margin-inline-start: -0.5rem;
-  margin-block: 0.75rem;
+.sl-markdown-content ol:not(:where(.not-content *)),
+[data-has-toc] .sl-markdown-content li:not(:where(.not-content *)) {
+  margin-inline-start: -0.7rem;
+  margin-block: 0.2rem;
 }
 
-/* footer side borders */
-.container-wrapper {
-  border-inline-style: none !important;
-}
-
-/* Version List Tree */
+/* Version list tree. */
 .vt-wrapper {
   position: relative;
   overflow-x: auto;
 }
 
-/* Opt out of Starlight markdown flow spacing inside the custom version table */
+/* Disable default markdown spacing. */
 .sl-markdown-content .vt-entry > * {
   margin-block: 0 !important;
 }
@@ -62,7 +67,6 @@
   flex-direction: column;
   gap: 0.55rem;
   width: 53rem;
-  padding: 0.5rem 0.6rem;
 
   &::before {
     content: '';
@@ -125,7 +129,7 @@
     padding: 0.3rem 0.5rem;
     border: 1px solid var(--border);
     border-radius: 1000px;
-    background: var(--popover);
+    background: var(--gray-7);
     color: var(--foreground);
     font-size: 0.75rem;
     font-weight: 700;
@@ -152,7 +156,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.5rem 0.7rem;
+  padding: 0.35rem 0.8rem;
   margin-top: 0 !important;
 
   & + & {
@@ -200,7 +204,7 @@
 .vt-preview {
   --vt-hover-color: var(--accent-foreground);
   font-weight: 600;
-  background: var(--card);
+  background: var(--gray-7);
   color: var(--foreground);
 
   .vt-name,
@@ -253,8 +257,7 @@
   }
 }
 
-.vt-time[data-timeago],
-.sidebar .entry-badge {
+.vt-time[data-timeago] {
   min-width: 6.5ch;
   text-align: right;
 }
@@ -318,7 +321,7 @@
   padding: 0.26rem 0.56rem;
   border: 1px solid var(--border);
   border-radius: calc(var(--radius) - 1px);
-  background: var(--popover);
+  background: var(--gray-7);
   color: var(--popover-foreground);
   font-size: 0.75rem;
   white-space: nowrap;
@@ -346,83 +349,42 @@
   }
 }
 
+/* Fix sidebar title sizing and color. */
+.entry-title {
+  font-size: 1.3rem !important;
+  color: var(--foreground) !important;
+}
+
 /* Sidebar timeAgo */
-.sidebar .entry-badge {
+.entry-link {
+  width: 100% !important;
+}
+
+.entry-link[data-timeago]::after,
+.mobile-nav-links a[data-timeago]::after {
+  content: attr(data-timeago-text);
   margin-inline-start: auto;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  background: none;
+  padding-inline-start: 0.5rem;
   color: var(--ring);
   font-size: 0.65rem;
   font-weight: inherit;
   white-space: nowrap;
-  cursor: inherit;
-  text-transform: none;
-  letter-spacing: normal;
+  flex-shrink: 0;
 }
 
-.sidebar a[aria-current='page'] .entry-badge {
-  color: var(--accent-foreground);
+.entry-link[aria-current='page'][data-timeago]::after {
+  color: var(--sidebar-accent-foreground);
 }
 
-/* Fix sidebar padding */
-.entry-title {
-  font-size: 1.2rem !important;
-}
-
-.sidebar {
-  padding-top: 1rem !important;
-}
-
-.container-sidebar {
-  gap: 1rem !important;
-}
-
-/* Hide "on this page" table of content item */
-p[id^='starlight__on-this-page'] {
+/* Hide the on-this-page text. */
+#starlight__on-this-page {
   display: none;
-}
-
-/* Fix table of content top margin */
-.toc > div {
-  margin-top: 0 !important;
-}
-
-/* Fix padding without table of contents */
-body:not(:has(.container-main)) .breadcrumb {
-  padding-top: 32px;
 }
 
 /* Handle thin display widths */
 @media (max-width: 1145px) {
-  aside.aside {
+  .right-sidebar-container {
     display: none !important;
-  }
-
-  .container-wrapper-main {
-    grid-template-columns: 1fr !important;
-  }
-
-  site-search {
-    flex: 1 1 0% !important;
-    width: 100% !important;
-  }
-
-  site-search button[data-open-modal] {
-    width: 100% !important;
-  }
-
-  .site-title-wrapper {
-    display: none !important;
-  }
-
-  .header-right {
-    justify-content: space-between !important;
-  }
-
-  button.show-modal {
-    display: inline-flex !important;
   }
 }
 
@@ -452,7 +414,7 @@ body:not(:has(.container-main)) .breadcrumb {
   .vt-year-stem {
     left: calc((var(--vt-stem-left) + var(--vt-offset)) * -1) !important;
     right: auto !important;
-    transform: translate(-10%, -50%) !important;
+    transform: translate(10%, -50%) !important;
   }
 
   .vt-time {
@@ -477,5 +439,36 @@ body:not(:has(.container-main)) .breadcrumb {
     .vt-id {
       flex-direction: row;
     }
+  }
+}
+
+/* Align page, header, and sidebar. */
+.page {
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+}
+
+.header {
+  inset-inline-start: var(--page-inset);
+  width: min(100vw, var(--page-max-width));
+}
+
+.sidebar-pane {
+  inset-inline-start: var(--page-inset);
+}
+
+/* Header grid fix */
+@media (min-width: 0rem) {
+  .header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Searchbar postion / size fix */
+@media (min-width: 48rem) {
+  .header > div:has(> site-search) {
+    flex: 1 1 auto;
   }
 }

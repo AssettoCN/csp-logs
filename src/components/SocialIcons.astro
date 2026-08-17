@@ -1,0 +1,28 @@
+---
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
+---
+
+<Default />
+<a href="https://acstuff.club/patch/" rel="me" class="sl-flex custom-website-link">
+  <span class="sr-only">Website</span>
+  <span class="custom-icon"></span>
+</a>
+
+<style>
+  .custom-website-link {
+    color: var(--sl-color-text-accent);
+    padding: 0.5em;
+    margin: -0.5em;
+  }
+  .custom-website-link:hover {
+    color: var(--sl-color-white);
+  }
+  .custom-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-color: currentColor;
+    mask: url(/favicon.svg) no-repeat center / contain;
+    -webkit-mask: url(/favicon.svg) no-repeat center / contain;
+  }
+</style>
