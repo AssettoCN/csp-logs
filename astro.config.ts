@@ -44,7 +44,7 @@ const changelogFiles = getChangelogFiles(changelogsDir)
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://assettocn.github.io/',
+  site: 'https://assetto.cn/',
   base: '/csp-logs',
   integrations: [
     starlight({
