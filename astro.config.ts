@@ -44,9 +44,13 @@ const changelogFiles = getChangelogFiles(path.join(changelogsDir, 'en')).map((f:
   });
 
 // https://astro.build/config
+// ESA Pages (csp.acmods.cn) hosts at the domain root; GitHub Pages hosts at /csp-logs.
+// ESA build env sets DEPLOY_TARGET=esa to switch.
+const isESA = process.env.DEPLOY_TARGET === 'esa';
+
 export default defineConfig({
-  site: 'https://assetto.cn/',
-  base: '/csp-logs',
+  site: isESA ? 'https://csp.acmods.cn/' : 'https://assetto.cn/',
+  base: isESA ? '/' : '/csp-logs',
   integrations: [
     starlight({
       defaultLocale: 'root',
