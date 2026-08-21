@@ -51,8 +51,8 @@ export default defineConfig({
       defaultLocale: 'root',
       title: 'Custom Shaders Patch Changelog Archive',
       locales: {
-        root: { label: 'English', lang: 'en' },
-        zh: { label: '简体中文', lang: 'zh-CN' },
+        root: { label: '简体中文', lang: 'zh-CN' },
+        en: { label: 'English', lang: 'en' },
       },
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 1 },
@@ -68,15 +68,15 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: 'Overview',
+          label: '总览',
           items: [
             { slug: '/' },
-            { label: 'Latest Preview', link: '/latest/preview', attrs: { 'data-timeago': latestPreviewVersion?.published } },
-            { label: 'Latest Public', link: '/latest/public', attrs: { 'data-timeago': latestPublicVersion?.published } },
+            { label: '最新预览版', link: '/latest/preview', attrs: { 'data-timeago': latestPreviewVersion?.published } },
+            { label: '最新公开版', link: '/latest/public', attrs: { 'data-timeago': latestPublicVersion?.published } },
             { slug: 'versions' },
           ],
         },
-        { label: 'Changelogs', items: changelogFiles },
+        { label: '更新日志', items: changelogFiles },
       ],
       plugins: [
         starlightThemeBlack({
