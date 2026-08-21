@@ -44,12 +44,16 @@ const changelogFiles = getChangelogFiles(changelogsDir)
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://c1xtz.github.io/',
+  site: 'https://assettocn.github.io/',
   base: '/csp-logs',
   integrations: [
     starlight({
-      defaultLocale: 'en',
+      defaultLocale: 'root',
       title: 'Custom Shaders Patch Changelog Archive',
+      locales: {
+        root: { label: 'English', lang: 'en' },
+        zh: { label: '简体中文', lang: 'zh-CN' },
+      },
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 1 },
       components: {
