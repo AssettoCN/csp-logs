@@ -70,7 +70,7 @@ export default defineConfig({
         {
           label: '总览',
           items: [
-            { slug: '/' },
+            { label: '首页', link: '/' },
             { label: '最新预览版', link: '/latest/preview', attrs: { 'data-timeago': latestPreviewVersion?.published } },
             { label: '最新公开版', link: '/latest/public', attrs: { 'data-timeago': latestPublicVersion?.published } },
             { slug: 'versions' },
