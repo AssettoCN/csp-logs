@@ -54,6 +54,7 @@ export default defineConfig({
         root: { label: '简体中文', lang: 'zh-CN' },
         en: { label: 'English', lang: 'en' },
       },
+      routeMiddleware: ['./src/starlightRouteData.ts'],
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 1 },
       components: {
@@ -68,15 +69,15 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: '总览',
+          label: 'Overview',
           items: [
-            { label: '首页', link: '/' },
-            { label: '最新预览版', link: '/latest/preview', attrs: { 'data-timeago': latestPreviewVersion?.published } },
-            { label: '最新公开版', link: '/latest/public', attrs: { 'data-timeago': latestPublicVersion?.published } },
+            { label: 'Home', link: '/' },
+            { label: 'Latest Preview', link: '/latest/preview', attrs: { 'data-timeago': latestPreviewVersion?.published } },
+            { label: 'Latest Public', link: '/latest/public', attrs: { 'data-timeago': latestPublicVersion?.published } },
             { slug: 'versions' },
           ],
         },
-        { label: '更新日志', items: changelogFiles },
+        { label: 'Changelogs', items: changelogFiles },
       ],
       plugins: [
         starlightThemeBlack({
