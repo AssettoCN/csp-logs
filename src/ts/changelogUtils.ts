@@ -34,7 +34,7 @@ export function filenameToTitle(name: string): string | null {
 }
 
 export function getChangelogFiles(changelogsDir: string): string[] {
-  return fs.readdirSync(changelogsDir).filter((f) => (f.endsWith('.md') || f.endsWith('.mdx')) && !['home.mdx', 'versions.mdx'].includes(f));
+  return fs.readdirSync(changelogsDir).filter((f) => (f.endsWith('.md') || f.endsWith('.mdx')) && !['home.mdx', 'versions.mdx', 'index.mdx', '404.md'].includes(f));
 }
 
 export function parseVersion(name: string): ParsedVersion {

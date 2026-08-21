@@ -19,7 +19,7 @@ interface VersionOutput {
 }
 
 const CONFIG: Config = {
-  changelogsDir: path.resolve(process.cwd(), 'src', 'content', 'docs'),
+  changelogsDir: path.resolve(process.cwd(), 'src', 'content', 'docs', 'en'),
   outputFile: path.resolve(process.cwd(), 'src', 'data', 'versions.json'),
 };
 
