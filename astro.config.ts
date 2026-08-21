@@ -12,13 +12,14 @@ const latestPublicVersion = flat.find((v) => !v.isPreview);
 
 const changelogsDir = path.join(process.cwd(), 'src', 'content', 'docs');
 
-const changelogFiles = getChangelogFiles(changelogsDir)
-  .map((f: string) => {
-    const content = fs.readFileSync(path.join(changelogsDir, f), 'utf8');
-    const title = content.match(/title:\s*(.+)/)?.[1]?.trim() || f.replace(/\.mdx?$/, '');
-    const slug = f.replace(/\.mdx?$/, '');
-    return { slug, title };
-  })
+// Slug entries are locale-resolved by Starlight: '0-3-0p110' renders the zh page
+// on zh routes and the en/ page on en routes. One config serves both locales.
+const changelogFiles = getChangelogFiles(path.join(changelogsDir, 'en')).map((f: string) => {
+  const base = f.replace(/\.mdx?$/, '');
+  const content = fs.readFileSync(path.join(changelogsDir, 'en', f), 'utf8');
+  const title = content.match(/title:\s*(.+)/)?.[1]?.trim() || base;
+  return { slug: base, title };
+})
   .sort((a, b) => {
     const regex = /(\d+)-(\d+)-(\d+)(p(\d+))?/;
     const matchA = a.slug.match(regex),
