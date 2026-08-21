@@ -52,7 +52,7 @@ function readChangelogFiles(): ChangelogEntry[] {
         versionName,
         versionId: versionIdRaw ?? '???',
         published,
-        link: `/csp-logs/${filename.replace(/\.mdx?$/, '')}`,
+        link: `/${filename.replace(/\.mdx?$/, '')}`,
         isPreview: versionName.includes('-preview'),
         yearMarker: null,
         _versionIdNumeric: versionIdNumeric,
