@@ -9,7 +9,7 @@
     [
       {
         "versionName": "0.3.0-preview581",
-        "versionId": "???",
+        "versionId": "4116",
         "published": "2026-09-02",
         "link": "/0-3-0p581",
         "isPreview": true,
@@ -21,7 +21,7 @@
         "published": "2026-08-14",
         "link": "/0-3-0p542",
         "isPreview": true,
-        "yearMarker": "2026"
+        "yearMarker": null
       },
       {
         "versionName": "0.3.0-preview535",
