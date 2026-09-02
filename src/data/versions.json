@@ -1,12 +1,20 @@
 {
   "hash": "db2c4e7534f1c3f1e23233ad2aad3fa1",
   "counts": {
-    "total": 265,
-    "previews": 193,
+    "total": 266,
+    "previews": 194,
     "releases": 72
   },
   "groups": [
     [
+      {
+        "versionName": "0.3.0-preview581",
+        "versionId": "???",
+        "published": "2026-09-02",
+        "link": "/0-3-0p581",
+        "isPreview": true,
+        "yearMarker": null
+      },
       {
         "versionName": "0.3.0-preview542",
         "versionId": "4077",
