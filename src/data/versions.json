@@ -1,19 +1,27 @@
 {
-  "hash": "b8e49dc18fb6de452fb809d4cf5b0b69",
+  "hash": "1ba9958eb46a35265e8bf3650c3bd0fb",
   "counts": {
-    "total": 266,
-    "previews": 194,
+    "total": 267,
+    "previews": 195,
     "releases": 72
   },
   "groups": [
     [
+      {
+        "versionName": "0.3.0-preview595",
+        "versionId": "4130",
+        "published": "2026-09-09",
+        "link": "/csp-logs/0-3-0p595",
+        "isPreview": true,
+        "yearMarker": null
+      },
       {
         "versionName": "0.3.0-preview581",
         "versionId": "4116",
         "published": "2026-09-02",
         "link": "/csp-logs/0-3-0p581",
         "isPreview": true,
-        "yearMarker": "2026"
+        "yearMarker": null
       },
       {
         "versionName": "0.3.0-preview542",
@@ -101,7 +109,7 @@
         "published": "2026-03-02",
         "link": "/csp-logs/0-3-0p302",
         "isPreview": true,
-        "yearMarker": null
+        "yearMarker": "2026"
       },
       {
         "versionName": "0.3.0-preview212",
@@ -109,7 +117,7 @@
         "published": "2025-12-26",
         "link": "/csp-logs/0-3-0p212",
         "isPreview": true,
-        "yearMarker": "2025"
+        "yearMarker": null
       },
       {
         "versionName": "0.3.0-preview211",
@@ -263,7 +271,7 @@
         "published": "2025-01-08",
         "link": "/csp-logs/0-2-6",
         "isPreview": false,
-        "yearMarker": null
+        "yearMarker": "2025"
       }
     ],
     [
@@ -273,7 +281,7 @@
         "published": "2024-12-24",
         "link": "/csp-logs/0-2-6p1",
         "isPreview": true,
-        "yearMarker": "2024"
+        "yearMarker": null
       },
       {
         "versionName": "0.2.5",
@@ -327,7 +335,7 @@
         "published": "2024-04-06",
         "link": "/csp-logs/0-2-3p211",
         "isPreview": true,
-        "yearMarker": null
+        "yearMarker": "2024"
       },
       {
         "versionName": "0.2.3-preview1",
@@ -335,7 +343,7 @@
         "published": "2023-12-22",
         "link": "/csp-logs/0-2-3p1",
         "isPreview": true,
-        "yearMarker": "2023"
+        "yearMarker": null
       },
       {
         "versionName": "0.2.2",
@@ -413,7 +421,7 @@
         "published": "2023-04-24",
         "link": "/csp-logs/0-1-80p218",
         "isPreview": true,
-        "yearMarker": null
+        "yearMarker": "2023"
       },
       {
         "versionName": "0.1.80-preview115",
@@ -421,7 +429,7 @@
         "published": "2022-12-31",
         "link": "/csp-logs/0-1-80p115",
         "isPreview": true,
-        "yearMarker": "2022"
+        "yearMarker": null
       },
       {
         "versionName": "0.1.80-preview108",
@@ -465,7 +473,7 @@
         "published": "2022-02-28",
         "link": "/csp-logs/0-1-77",
         "isPreview": false,
-        "yearMarker": null
+        "yearMarker": "2022"
       }
     ],
     [
@@ -475,7 +483,7 @@
         "published": "2021-12-22",
         "link": "/csp-logs/0-1-77p1",
         "isPreview": true,
-        "yearMarker": "2021"
+        "yearMarker": null
       },
       {
         "versionName": "0.1.76",
@@ -623,7 +631,7 @@
         "published": "2021-01-08",
         "link": "/csp-logs/0-1-70",
         "isPreview": false,
-        "yearMarker": null
+        "yearMarker": "2021"
       }
     ],
     [
@@ -633,7 +641,7 @@
         "published": "2020-12-31",
         "link": "/csp-logs/0-1-70p1",
         "isPreview": true,
-        "yearMarker": "2020"
+        "yearMarker": null
       },
       {
         "versionName": "0.1.69",
@@ -1083,7 +1091,7 @@
         "published": "2020-01-08",
         "link": "/csp-logs/0-1-37p6",
         "isPreview": true,
-        "yearMarker": null
+        "yearMarker": "2020"
       },
       {
         "versionName": "0.1.36",
@@ -1091,7 +1099,7 @@
         "published": "2019-12-25",
         "link": "/csp-logs/0-1-36",
         "isPreview": false,
-        "yearMarker": "2019"
+        "yearMarker": null
       }
     ],
     [
@@ -1489,7 +1497,7 @@
         "published": "2019-01-10",
         "link": "/csp-logs/0-1-25p36",
         "isPreview": true,
-        "yearMarker": null
+        "yearMarker": "2019"
       },
       {
         "versionName": "0.1.25-preview32",
@@ -1497,7 +1505,7 @@
         "published": "2018-12-11",
         "link": "/csp-logs/0-1-25p32",
         "isPreview": true,
-        "yearMarker": "2018"
+        "yearMarker": null
       },
       {
         "versionName": "0.1.25-preview31",
@@ -2277,7 +2285,7 @@
         "published": "2018-06-05",
         "link": "/csp-logs/0-1-18p1",
         "isPreview": true,
-        "yearMarker": null
+        "yearMarker": "2018"
       }
     ]
   ]
