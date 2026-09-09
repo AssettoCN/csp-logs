@@ -1,19 +1,27 @@
 {
-  "hash": "af25abfc5559e7b9bf0554001bb55ad0",
+  "hash": "45c7c94be57f7502acd6216dad97b57e",
   "counts": {
-    "total": 266,
-    "previews": 194,
+    "total": 267,
+    "previews": 195,
     "releases": 72
   },
   "groups": [
     [
+      {
+        "versionName": "0.3.0-preview595",
+        "versionId": "???",
+        "published": "2026-09-09",
+        "link": "/0-3-0p595",
+        "isPreview": true,
+        "yearMarker": "2026"
+      },
       {
         "versionName": "0.3.0-preview581",
         "versionId": "4116",
         "published": "2026-09-02",
         "link": "/0-3-0p581",
         "isPreview": true,
-        "yearMarker": "2026"
+        "yearMarker": null
       },
       {
         "versionName": "0.3.0-preview542",
