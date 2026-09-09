@@ -472,3 +472,17 @@
     flex: 1 1 auto;
   }
 }
+
+/* Pagination Padding Removal */
+footer .meta:empty {
+  display: none;
+}
+
+footer .pagination-links {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.docs-nav .nav-buttons {
+  display: none;
+}
