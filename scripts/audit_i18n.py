@@ -20,10 +20,7 @@ import os
 
 DOCS = os.path.join(os.path.dirname(__file__), "..", "src", "content", "docs")
 
-# Known acceptable exceptions:
-# 0-3-0p581.md — upstream condensed the EN gist after our zh translation was
-# made; zh keeps the fuller original (notice says EN version prevails).
-SKIP = {"0-3-0p581.md"}
+BULLETS = r"^\s*(?:\*   |• |- )"
 
 
 def body_of(md: str) -> str:
@@ -33,8 +30,6 @@ def body_of(md: str) -> str:
 
 def audit(zh_path: str):
     name = os.path.basename(zh_path)
-    if name in SKIP:
-        return name, []
     en_path = os.path.join(DOCS, "en", name)
     problems = []
     if not os.path.exists(en_path):
@@ -53,9 +48,9 @@ def audit(zh_path: str):
         problems.append("缺 `# 更新日志`")
 
     zb, eb = body_of(zh), body_of(en)
-    # EN pages occasionally use `• ` bullets; zh normalizes to `*   ` per convention
-    z_items = len(re.findall(r"^\s*\*   ", zb, re.M))
-    e_items = len(re.findall(r"^\s*(?:\*   |• )", eb, re.M))
+    # EN uses `*   `, `• ` or `- ` depending on page age/source; count all three
+    z_items = len(re.findall(BULLETS, zb, re.M))
+    e_items = len(re.findall(BULLETS, eb, re.M))
     if z_items != e_items:
         problems.append(f"列表项 EN {e_items} ≠ ZH {z_items}")
 

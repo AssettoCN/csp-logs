@@ -67,7 +67,7 @@ function readChangelogFiles(): ChangelogEntry[] {
 }
 
 function placeYearMarkers(entries: ChangelogEntry[]): void {
-  const entryByYear = new Map<string, { index: number; time: number }>();
+  const entryByYear = new Map<string, { index: number; time: number; versionId: number | null }>();
 
   entries.forEach((entry, index) => {
     const year = entry.published?.slice(0, 4);
@@ -76,8 +76,26 @@ function placeYearMarkers(entries: ChangelogEntry[]): void {
     const time = Date.parse(`${entry.published}T00:00:00Z`);
     if (Number.isNaN(time)) return;
 
+    const parsedVersionId = Number(entry.versionId);
+    const versionId = Number.isNaN(parsedVersionId) ? null : parsedVersionId;
+
     const current = entryByYear.get(year);
-    if (!current || time > current.time) entryByYear.set(year, { index, time });
+
+    if (!current) {
+      entryByYear.set(year, { index, time, versionId });
+      return;
+    }
+
+    if (time < current.time) {
+      entryByYear.set(year, { index, time, versionId });
+      return;
+    }
+
+    if (time > current.time) return;
+
+    if (versionId !== null && current.versionId !== null && versionId < current.versionId) {
+      entryByYear.set(year, { index, time, versionId });
+    }
   });
 
   entryByYear.forEach(({ index }, year) => {
